@@ -1,0 +1,51 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#0ea5e9",
+        secondary: "#6366f1",
+        dark: "#0f172a",
+        light: "#e6f7f0",
+      },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        mono: ["Fira Code", "monospace"],
+      },
+    },
+  },
+  darkMode: "class",
+  plugins: [],
+  // Enable all the utility classes used in the project
+  safelist: [
+    "px-6",
+    "py-2",
+    "rounded-md",
+    "font-medium",
+    "transition-all",
+    "duration-300",
+    "focus:outline-none",
+    "focus:ring-2",
+    "focus:ring-offset-2",
+    "bg-primary",
+    "text-white",
+    "hover:bg-primary/90",
+    "focus:ring-primary/50",
+    "bg-secondary",
+    "hover:bg-secondary/90",
+    "focus:ring-secondary/50",
+    "border-2",
+    "border-primary",
+    "text-primary",
+    "hover:bg-primary",
+    "hover:text-white",
+    "mx-auto",
+    "px-4",
+    "sm:px-6",
+    "lg:px-8",
+    "max-w-7xl",
+    "py-16",
+    "md:py-24",
+  ],
+};
