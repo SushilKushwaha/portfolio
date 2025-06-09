@@ -11,8 +11,8 @@ const CertificationsSection = () => {
       date: "December 2023",
       description:
         "Comprehensive course covering MERN stack development, including React, Node.js, Express, and MongoDB.",
-      image: "E:/Portfolio Website/public/1725442471_4999_999925_page-0001.jpg", // Replace with actual image path
-      link: "https://drive.google.com/drive/u/0/folders/1u5fPccgnWjwTWpW2jP_ystmTxxLS--kD",
+      image: "/certifications/1725442471_4999_999925_page-0001.jpg", // Replace with actual image path
+      link: "https://drive.google.com/file/d/1I3HLg4OcHzUQkbFHD1PNqCzAyVgAVpkh/view",
     },
     {
       id: 2,
@@ -21,18 +21,18 @@ const CertificationsSection = () => {
       date: "April 2024",
       description:
         "The fundamentals of REST APIs,Creating servers using Express.js,Utilizing Express Routers and Middlewares",
-      image: "E:/Portfolio Website/public/39.png", // Replace with actual image path
-      link: "https://drive.google.com/drive/u/0/folders/1u5fPccgnWjwTWpW2jP_ystmTxxLS--kD",
+      image: "/certifications/39.png", // Replace with actual image path
+      link: "https://drive.google.com/file/d/1uFZAQbGjLr5s1CSM_k9GKmkLl7QLrvxn/view",
     },
     {
       id: 3,
       title: "Software Engineering Intern",
       organization: "HackerRank",
-      date: "June 2022",
+      date: "May 2024",
       description:
         "Official MongoDB certification covering database design, optimization, and administration.",
-      image: "software_engineer_intern certificate.pdf_page-0001.jpg", // Replace with actual image path
-      link: "https://drive.google.com/drive/u/0/folders/1u5fPccgnWjwTWpW2jP_ystmTxxLS--kD",
+      image: "/certifications/software_engineer_intern certificate.jpg", // Replace with actual image path
+      link: "https://drive.google.com/file/d/1zZ34FLwAnd2ARz_biB_OROLodVlakzHB/view",
     },
     {
       id: 4,
@@ -93,25 +93,14 @@ const CertificationsSection = () => {
               className="bg-green-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer"
               onClick={() => openCertModal(cert)}
             >
-              <div className="h-40 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                <div className="text-center p-4">
-                  <div className="text-primary text-4xl mb-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-12 w-12 mx-auto"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-gray-500 dark:text-gray-400 text-sm">
+              <div className="h-40 bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                <img
+                  src={cert.image}
+                  alt={cert.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                  <span className="text-gray-500 dark:text-gray-400 text-sm bg-white dark:bg-gray-800 px-2 py-1 rounded">
                     {cert.organization}
                   </span>
                 </div>
@@ -184,28 +173,12 @@ const CertificationsSection = () => {
                     </button>
                   </div>
 
-                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 mb-4 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <div className="text-primary text-4xl mb-4">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-20 w-20 mx-auto"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                          />
-                        </svg>
-                      </div>
-                      <span className="text-gray-500 dark:text-gray-400">
-                        Certificate Preview
-                      </span>
-                    </div>
+                  <div className="bg-gray-100 dark:bg-gray-700 rounded-lg mb-4 overflow-hidden">
+                    <img
+                      src={selectedCert.image}
+                      alt={selectedCert.title}
+                      className="w-full object-contain max-h-[400px]"
+                    />
                   </div>
 
                   <p className="text-gray-600 dark:text-gray-300 mb-6">

@@ -9,7 +9,7 @@ const ProjectsSection = () => {
       title: "Koshish CMS",
       description:
         "A content management system for non-profit organizations to manage their resources, events, and volunteers.",
-      image: "/projects/koshish-cms.jpg", // Replace with actual image path
+      image: "/projects/koshish-org-np.png", // Replace with actual image path
       tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
       liveLink: "https://koshish.org.np/",
       githubLink: "#",
@@ -20,7 +20,7 @@ const ProjectsSection = () => {
       title: "Nepal Estate",
       description:
         "A real estate platform for buying, selling, and renting properties in Nepal with advanced search and filtering options.",
-      image: "/projects/nepal-estate.jpg", // Replace with actual image path
+      image: "/projects/nepalEstate.png", // Replace with actual image path
       tags: ["React", "Node.js", "Express", "MongoDB", "Material UI"],
       liveLink: null,
       githubLink: "https://github.com/SushilKushwaha/nepal-estate",
@@ -31,7 +31,7 @@ const ProjectsSection = () => {
       title: "CinemaGhar",
       description:
         "A movie booking application with features like seat selection, payment integration, and user reviews.",
-      image: "/projects/cinema-ghar.jpg", // Replace with actual image path
+      image: "/projects/cinemaGhar.png", // Replace with actual image path
       tags: ["React", "Node.js", "Express", "MongoDB", "Firebase"],
       liveLink: null,
       githubLink: "https://github.com/SushilKushwaha/cinema-ghar",
@@ -126,11 +126,13 @@ const ProjectsSection = () => {
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                  <span>
-                    {project.title}
-                    <img src="koshish-org-np.png" />
-                  </span>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-gray-500 dark:text-gray-400 opacity-0 hover:opacity-100 transition-opacity">
+                  <span>{project.title}</span>
                 </div>
                 {project.featured && (
                   <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">

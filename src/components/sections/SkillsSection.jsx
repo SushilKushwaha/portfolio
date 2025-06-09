@@ -13,6 +13,7 @@ const SkillsSection = () => {
         { name: "Tailwind CSS", level: 80 },
         { name: "Material UI", level: 75 },
         { name: "Redux", level: 70 },
+        { name: "Angular", level: 75 },
       ],
     },
     {
