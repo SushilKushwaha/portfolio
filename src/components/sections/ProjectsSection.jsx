@@ -127,7 +127,10 @@ const ProjectsSection = () => {
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                  <span>{project.title} Screenshot</span>
+                  <span>
+                    {project.title}
+                    <img src="koshish-org-np.png" />
+                  </span>
                 </div>
                 {project.featured && (
                   <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">

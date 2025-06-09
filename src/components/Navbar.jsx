@@ -2,20 +2,22 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTheme } from "../hooks/useTheme";
+import useScrollToSection from "../hooks/useScrollToSection";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const scrollToSection = useScrollToSection();
 
   // Navigation links
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/#about" },
-    { name: "Experience", path: "/#experience" },
-    { name: "Projects", path: "/#projects" },
-    { name: "Skills", path: "/#skills" },
-    { name: "Contact", path: "/#contact" },
+    { name: "Home", path: "/", sectionId: null },
+    { name: "About", path: "/#about", sectionId: "about" },
+    { name: "Experience", path: "/#experience", sectionId: "experience" },
+    { name: "Projects", path: "/#projects", sectionId: "projects" },
+    { name: "Skills", path: "/#skills", sectionId: "skills" },
+    { name: "Contact", path: "/#contact", sectionId: "contact" },
   ];
 
   // Handle scroll event to change navbar style
@@ -41,6 +43,19 @@ const Navbar = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
+  
+  // Handle navigation link click
+  const handleNavLinkClick = (e, sectionId) => {
+    e.preventDefault();
+    closeMobileMenu();
+    
+    if (sectionId) {
+      scrollToSection(sectionId);
+    } else {
+      // If it's the home link, scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <header
@@ -52,7 +67,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold">
+        <Link 
+          to="/" 
+          className="text-2xl font-bold"
+          onClick={(e) => handleNavLinkClick(e, null)}
+        >
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,7 +102,7 @@ const Navbar = () => {
               <Link
                 to={link.path}
                 className="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors"
-                onClick={closeMobileMenu}
+                onClick={(e) => handleNavLinkClick(e, link.sectionId)}
               >
                 {link.name}
               </Link>
@@ -229,7 +248,7 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors py-2"
-                onClick={closeMobileMenu}
+                onClick={(e) => handleNavLinkClick(e, link.sectionId)}
               >
                 {link.name}
               </Link>
