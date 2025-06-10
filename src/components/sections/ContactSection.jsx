@@ -376,32 +376,18 @@ const ContactSection = () => {
             </div>
 
             {/* Map or Image */}
-            <div className="rounded-xl overflow-hidden h-64 bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-              <div className="text-center p-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-12 w-12 mx-auto text-primary mb-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <p className="text-gray-500 dark:text-gray-400">
-                  Kathmandu, Nepal
-                </p>
-              </div>
+            <div className="rounded-xl overflow-hidden h-64 bg-gray-100 dark:bg-gray-800">
+              <iframe
+                title="Kathmandu Location"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0 }}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.2442604036637!2d85.31879461506193!3d27.70895598279383!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1909c7f8427b%3A0x7ec7b733c2b9f8c9!2sKathmandu%2C%20Nepal!5e0!3m2!1sen!2snp!4v1717991800000!5m2!1sen!2snp"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
 
             {/* Social Links */}
@@ -440,6 +426,23 @@ const ContactSection = () => {
                     <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z" />
                   </svg>
                 </a>
+                <a
+                  href="https://instagram.com/i_sushil45ro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:shadow-md transition-all"
+                  aria-label="Instagram"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zm8.75 2.25a.75.75 0 01.75.75v1a.75.75 0 01-1.5 0v-1a.75.75 0 01.75-.75zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+                  </svg>
+                </a>
+
                 <a
                   href="mailto:sushilsinha733@gmail.com"
                   className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:shadow-md transition-all"

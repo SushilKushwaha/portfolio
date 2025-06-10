@@ -1,13 +1,90 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const HeroSection = () => {
+  // State for typing animation
+  const [displayText, setDisplayText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const fullText = "MERN Stack Developer";
+
+  // Typing animation effect
+  useEffect(() => {
+    if (currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText((prevText) => prevText + fullText[currentIndex]);
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+      }, 100);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, fullText]);
+
+  // Skills for floating badges
+  const skills = [
+    { name: "React", color: "bg-blue-500" },
+    { name: "Node.js", color: "bg-green-600" },
+    { name: "MongoDB", color: "bg-green-500" },
+    { name: "Express", color: "bg-gray-700" },
+    { name: "JavaScript", color: "bg-yellow-500" },
+    { name: "Tailwind", color: "bg-cyan-500" },
+  ];
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
+      {/* Enhanced Background Elements */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-20 to-gray-70 dark:from-gray-900 dark:to-gray-800">
+        {/* Background image with light opacity */}
+        <div className="absolute inset-0 z-0 opacity-20 dark:opacity-5">
+          <img
+            src="/projects/programming-background.jpg"
+            alt="Background"
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.style.display = "none";
+            }}
+          />
+        </div>
+
+        <motion.div
+          className="absolute top-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 4,
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/3 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 z-10">
@@ -19,17 +96,20 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <motion.p
-              className="text-primary font-medium mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+            <motion.div
+              className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-medium mb-6"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              Hello, I'm
-            </motion.p>
+              <span className="flex items-center">
+                <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></span>
+                Hello, I'm
+              </span>
+            </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
@@ -37,23 +117,27 @@ const HeroSection = () => {
               Sushil Kumar Kushwaha
             </motion.h1>
 
-            <motion.h2
-              className="text-2xl md:text-3xl font-bold text-primary mb-6"
+            <motion.div
+              className="relative h-12 mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              MERN Stack Developer
-            </motion.h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-primary inline-block">
+                {displayText}
+                <span className="animate-blink">|</span>
+              </h2>
+            </motion.div>
 
             <motion.p
-              className="text-gray-600 dark:text-gray-400 text-lg mb-8 max-w-lg mx-auto md:mx-0"
+              className="text-gray-600 dark:text-gray-400 text-lg mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
               Building modern, responsive web applications with a focus on user
-              experience and performance.
+              experience and performance. Passionate about creating clean,
+              efficient code and delivering exceptional digital experiences.
             </motion.p>
 
             <motion.div
@@ -64,21 +148,53 @@ const HeroSection = () => {
             >
               <Link
                 to="/#projects"
-                className="btn-primary w-full md:w-auto rounded-lg"
+                className="btn-primary w-full md:w-auto rounded-lg shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-1"
               >
-                View Projects
+                <span className="flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                    />
+                  </svg>
+                  View Projects
+                </span>
               </Link>
               <a
                 href="/Sushil_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-outline rounded-lg"
+                className="btn-outline rounded-lg shadow-lg hover:shadow-gray-400/20 transition-all duration-300 transform hover:-translate-y-1"
               >
-                Download Resume
+                <span className="flex items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                  Download Resume
+                </span>
               </a>
             </motion.div>
 
-            {/* Social Links */}
+            {/* Enhanced Social Links */}
             <motion.div
               className="flex gap-4 mt-8 justify-center md:justify-start"
               initial={{ opacity: 0 }}
@@ -89,7 +205,7 @@ const HeroSection = () => {
                 href="https://github.com/SushilKushwaha"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-green-50 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary hover:shadow-md transition-all"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
                 aria-label="GitHub"
               >
                 <svg
@@ -105,7 +221,7 @@ const HeroSection = () => {
                 href="https://linkedin.com/in/sushil-kushwaha-71aa13220"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-green-50 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary hover:shadow-md transition-all"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
                 aria-label="LinkedIn"
               >
                 <svg
@@ -119,7 +235,7 @@ const HeroSection = () => {
               </a>
               <a
                 href="mailto:sushilsinha733@gmail.com"
-                className="p-2 bg-green-50 dark:bg-gray-800 rounded-full text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary hover:shadow-md transition-all"
+                className="p-3 bg-white dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
                 aria-label="Email"
               >
                 <svg
@@ -140,28 +256,76 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Hero Image */}
+          {/* Enhanced Hero Image */}
           <motion.div
             className="w-full md:w-1/2"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="relative">
-              <div className="w-64 h-64 md:w-80 md:h-80 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
-                {/* Replace with actual image when available */}
-                <div className="w-full h-full  flex items-center justify-center text-white text-lg font-medium">
-                  <img
-                    className="mt-[50px]"
-                    src="/SushilPP.jpeg"
-                    alt="Sushil's Profile Picture"
-                  />
-                </div>
+            <div className="relative mx-auto" style={{ maxWidth: "350px" }}>
+              {/* Animated background ring */}
+              <motion.div
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary opacity-30 blur-md"
+                animate={{
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{ width: "100%", height: "100%" }}
+              />
+
+              {/* Profile image container */}
+              <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20" />
+                <img
+                  className="w-full h-full object-cover object-center"
+                  src="/SushilPP.jpeg"
+                  alt="Sushil's Profile Picture"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/istockphoto.jpg"; // Fallback image
+                  }}
+                />
               </div>
 
-              {/* Floating Elements */}
+              {/* Floating skill badges */}
+              {skills.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  className={`absolute ${skill.color} text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg`}
+                  initial={{
+                    x: Math.random() * 100 - 50,
+                    y: Math.random() * 100 - 50,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    x: Math.random() * 100 - 50,
+                    y: Math.random() * 100 - 50,
+                    opacity: 1,
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 3 + index,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    delay: index * 0.5,
+                  }}
+                  style={{
+                    top: `${20 + ((index * 30) % 80)}%`,
+                    left: index % 2 === 0 ? "-10%" : "85%",
+                  }}
+                >
+                  {skill.name}
+                </motion.div>
+              ))}
+
+              {/* Enhanced Floating Elements */}
               <motion.div
-                className="absolute -top-4 -right-4 bg-green-50 dark:bg-gray-800 p-3 rounded-full shadow-lg"
+                className="absolute -top-4 -right-4 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700"
                 animate={{ y: [0, -10, 0] }}
                 transition={{
                   repeat: Infinity,
@@ -186,7 +350,7 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-4 -left-4 bg-green-50 dark:bg-gray-800 p-3 rounded-full shadow-lg"
+                className="absolute -bottom-4 -left-4 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg border border-gray-200 dark:border-gray-700"
                 animate={{ y: [0, 10, 0] }}
                 transition={{
                   repeat: Infinity,
@@ -214,7 +378,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Down Indicator */}
+        {/* Enhanced Scroll Down Indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
@@ -222,23 +386,20 @@ const HeroSection = () => {
         >
           <a
             href="#about"
-            className="flex flex-col items-center text-gray-500 dark:text-gray-400"
+            className="flex flex-col items-center text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
           >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            <span className="text-sm font-medium mb-2">Scroll Down</span>
+            <div className="w-8 h-12 border-2 border-gray-400 dark:border-gray-600 rounded-full flex justify-center">
+              <motion.div
+                className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full mt-2"
+                animate={{ y: [0, 16, 0] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.5,
+                  ease: "easeInOut",
+                }}
               />
-            </svg>
+            </div>
           </a>
         </motion.div>
       </div>

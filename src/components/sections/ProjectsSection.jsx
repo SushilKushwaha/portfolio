@@ -130,6 +130,10 @@ const ProjectsSection = () => {
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "/istockphoto.jpg"; // Fallback to a default image
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 flex items-center justify-center text-gray-500 dark:text-gray-400 opacity-0 hover:opacity-100 transition-opacity">
                   <span>{project.title}</span>

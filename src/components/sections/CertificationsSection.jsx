@@ -38,10 +38,10 @@ const CertificationsSection = () => {
       id: 4,
       title: "Responsive Web Design",
       organization: "freeCodeCamp",
-      date: "August 2021",
+      date: "August 2024",
       description:
         "Certification in creating responsive and accessible web designs using HTML, CSS, and JavaScript.",
-      image: "/certifications/responsive-cert.jpg", // Replace with actual image path
+      image: "/projects/programming-background.jpg", // Replace with actual image path
       link: "#",
     },
   ];
