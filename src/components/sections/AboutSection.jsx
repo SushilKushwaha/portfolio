@@ -127,12 +127,12 @@ const AboutSection = () => {
           >
             <h3 className="text-2xl font-bold mb-4">Sushil Kumar Kushwaha</h3>
             <h4 className="text-xl text-primary font-semibold mb-6">
-              MERN Stack Developer
+              Full Stack Developer
             </h4>
 
             <div className="space-y-4 text-gray-600 dark:text-gray-400 mb-8">
               <p>
-                I am a passionate MERN stack developer with expertise in
+                I am a passionate full stack developer with expertise in
                 building modern, responsive web applications. With a strong
                 foundation in JavaScript, React, Node.js, and MongoDB, I create
                 seamless user experiences and robust backend solutions.

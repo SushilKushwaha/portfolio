@@ -62,7 +62,7 @@ const SkillsSection = () => {
           <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             I've developed a diverse set of skills throughout my journey as a
-            MERN stack developer. Here's an overview of my technical expertise.
+            Full stack developer. Here's an overview of my technical expertise.
           </p>
         </motion.div>
 

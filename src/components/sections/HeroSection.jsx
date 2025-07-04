@@ -6,7 +6,7 @@ const HeroSection = () => {
   // State for typing animation
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const fullText = "MERN Stack Developer";
+  const fullText = "Full Stack Developer";
 
   // Typing animation effect
   useEffect(() => {

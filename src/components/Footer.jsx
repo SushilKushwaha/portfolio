@@ -89,7 +89,7 @@ const Footer = () => {
               <span className="text-dark dark:text-light">.dev</span>
             </Link>
             <p className="mt-4 text-gray-600 dark:text-gray-400">
-              A passionate MERN stack developer based in Kathmandu, creating
+              A passionate Full stack developer based in Kathmandu, creating
               modern web applications with a focus on user experience and
               performance.
             </p>
