@@ -283,7 +283,7 @@ const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20" />
                 <img
                   className="w-full h-full object-cover object-center"
-                  src="/SushilPP.jpeg"
+                  src="/sushil1.png"
                   alt="Sushil's Profile Picture"
                   onError={(e) => {
                     e.target.onerror = null;

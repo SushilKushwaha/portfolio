@@ -106,8 +106,8 @@ const AboutSection = () => {
               {/* Replace with actual image when available */}
               <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-gray-500 dark:text-gray-400 text-lg font-medium">
                 <img
-                  className="mt-[200px] object-cover"
-                  src="/SushilDD.jpeg"
+                  className=" w-full h-full object-cover"
+                  src="/GOVL6342.JPG"
                   alt="Sushil's Profile Picture"
                 />
               </div>
