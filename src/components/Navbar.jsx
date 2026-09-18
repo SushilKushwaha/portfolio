@@ -1,261 +1,160 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, NavLink } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
-import useScrollToSection from "../hooks/useScrollToSection";
+
+const navLinks = [
+  { name: "About", path: "/about", num: "01" },
+  { name: "Experience", path: "/experience", num: "02" },
+  { name: "Projects", path: "/projects", num: "03" },
+  { name: "Skills", path: "/skills", num: "04" },
+  { name: "Certifications", path: "/certifications", num: "05" },
+  { name: "Contact", path: "/contact", num: "06" },
+];
+
+const SunIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+  </svg>
+);
+
+const MoonIcon = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+  </svg>
+);
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const scrollToSection = useScrollToSection();
 
-  // Navigation links
-  const navLinks = [
-    { name: "Home", path: "/", sectionId: null },
-    { name: "About", path: "/#about", sectionId: "about" },
-    { name: "Experience", path: "/#experience", sectionId: "experience" },
-    { name: "Projects", path: "/#projects", sectionId: "projects" },
-    { name: "Skills", path: "/#skills", sectionId: "skills" },
-    { name: "Contact", path: "/#contact", sectionId: "contact" },
-  ];
-
-  // Handle scroll event to change navbar style
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle mobile menu toggle
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
-  // Close mobile menu when clicking a link
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-  
-  // Handle navigation link click
-  const handleNavLinkClick = (e, sectionId) => {
-    e.preventDefault();
-    closeMobileMenu();
-    
-    if (sectionId) {
-      scrollToSection(sectionId);
-    } else {
-      // If it's the home link, scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const linkClass = ({ isActive }) =>
+    `relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+      isActive ? "text-primary" : "text-muted hover:text-body"
+    }`;
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 border-b transition-colors duration-300 ${
         isScrolled
-          ? "bg-blue-50/95 dark:bg-indigo-950/95 backdrop-blur-sm shadow-md py-2"
-          : "bg-blue-50/85 dark:bg-indigo-950/85 backdrop-blur-sm py-4"
+          ? "bg-surface/85 backdrop-blur-md border-subtle"
+          : "bg-surface/60 backdrop-blur-md border-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link 
-          to="/" 
-          className="text-2xl font-bold"
-          onClick={(e) => handleNavLinkClick(e, null)}
-        >
-          <motion.span
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-primary"
-          >
-            Sushil
-          </motion.span>
-          <motion.span
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-dark dark:text-light"
-          >
-            .dev
-          </motion.span>
+      <div
+        className="h-[3px] w-full"
+        style={{ background: "linear-gradient(to right, var(--color-primary), var(--color-accent-gold))" }}
+        aria-hidden="true"
+      />
+      <div className="container flex items-center justify-between h-16">
+        <Link to="/" className="flex items-center gap-2.5 group" onClick={closeMobileMenu}>
+          <span
+            className="h-4 w-4 rotate-45 rounded-[3px] transition-transform duration-300 group-hover:rotate-[135deg]"
+            style={{ background: "linear-gradient(135deg, var(--color-primary), var(--color-accent-gold))" }}
+            aria-hidden="true"
+          />
+          <span className="font-mono text-lg font-semibold tracking-tight text-body">
+            Sushil<span className="text-primary">.</span>dev
+          </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link, index) => (
-            <motion.div
-              key={link.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <Link
-                to={link.path}
-                className="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors"
-                onClick={(e) => handleNavLinkClick(e, link.sectionId)}
-              >
-                {link.name}
-              </Link>
-            </motion.div>
+        <nav className="hidden lg:flex items-center gap-1" aria-label="Primary">
+          {navLinks.map((link) => (
+            <NavLink key={link.name} to={link.path} className={linkClass}>
+              {({ isActive }) => (
+                <>
+                  <span className="font-mono text-[10px] text-muted mr-1.5 align-middle">{link.num}</span>
+                  {link.name}
+                  {isActive && <span className="absolute left-3 right-3 -bottom-[1px] h-0.5 rounded-full bg-primary" />}
+                </>
+              )}
+            </NavLink>
           ))}
-
-          {/* Theme Toggle Button */}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.6 }}
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-dark dark:text-light"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-            )}
-          </motion.button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={toggleTheme}
-            className="p-2 mr-2 rounded-full bg-gray-100 dark:bg-gray-800 text-dark dark:text-light"
-            aria-label="Toggle theme"
+            className="p-2 rounded-full text-muted hover:text-body hover:bg-surface-alt transition-colors"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
           >
-            {theme === "dark" ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-            )}
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <Link to="/contact" className="btn-primary">
+            Let&apos;s Connect
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-1 lg:hidden">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full text-muted hover:text-body hover:bg-surface-alt transition-colors"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+          >
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
           <button
-            onClick={toggleMobileMenu}
-            className="p-2 rounded-md text-dark dark:text-light"
-            aria-label="Toggle mobile menu"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="p-2 rounded-md text-body"
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMobileMenuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{
-          height: isMobileMenuOpen ? "auto" : 0,
-          opacity: isMobileMenuOpen ? 1 : 0,
-        }}
-        transition={{ duration: 0.3 }}
-        className="md:hidden overflow-hidden bg-green-200 dark:bg-indigo-950"
+      <div
+        id="mobile-menu"
+        className={`lg:hidden overflow-hidden bg-surface border-t border-subtle transition-[max-height] duration-300 ease-in-out ${
+          isMobileMenuOpen ? "max-h-96" : "max-h-0"
+        }`}
       >
-        <div className="container mx-auto px-4 py-4">
-          <nav className="flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="text-dark dark:text-light hover:text-primary dark:hover:text-primary transition-colors py-2"
-                onClick={(e) => handleNavLinkClick(e, link.sectionId)}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </motion.div>
+        <nav className="container flex flex-col py-3" aria-label="Mobile">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path}
+              onClick={closeMobileMenu}
+              className={({ isActive }) =>
+                `py-3 text-base font-medium border-b border-subtle last:border-none ${
+                  isActive ? "text-primary" : "text-body"
+                }`
+              }
+            >
+              {link.name}
+            </NavLink>
+          ))}
+          <Link to="/contact" onClick={closeMobileMenu} className="btn-primary justify-center mt-4">
+            Let&apos;s Connect
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 };
